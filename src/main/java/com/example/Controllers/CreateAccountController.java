@@ -12,11 +12,11 @@ public class CreateAccountController {
         this.createAccountRepo = createAccountRepo;
     }
 
-    public String createaccount(Users user) throws SQLException{
+    public boolean createaccount(Users user) throws SQLException{
         if(createAccountRepo.createAccount(user)){
-            return "Added User";
+            return true;
         } else {
-            return "Failed to Add User";
+            return false;
         }
     }
 }

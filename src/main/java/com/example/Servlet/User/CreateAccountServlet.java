@@ -40,7 +40,7 @@ public class CreateAccountServlet extends HttpServlet {
 
         // Chỗ này không thể tự động tạo ra
         Users user = new Users(68, email, password, fullname, address, 0);
-        String result = null;
+        boolean result = false;
 
         try {
             result = createAccountController.createaccount(user);
@@ -52,12 +52,10 @@ public class CreateAccountServlet extends HttpServlet {
             resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Lỗi xử lý yêu cầu.");
         }
 
-        out.print(result);
-
-        if(result == "Added User") {
-            out.println("Thanh cong");
-        } else if(result == "Failed to Add User") {
-            out.print("That bai");
+        if(result) {
+            out.println("Tao tai khoan thanh cong");
+        } else {
+            out.print("Tao tai khoan that bai");
         }
     }
 }

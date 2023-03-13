@@ -30,6 +30,7 @@ public class UserService implements UserValidatorRepo, CreateAccountRepo, LoginR
 
     @Override
     public boolean createAccount(Users user) throws SQLException {
+        // Chỗ này không biết trả về cái gì nên không thể xác định được phải bắt cái gì để hiển thị ra client
         int result = db.add(user);
 
         if(result == 200) {
@@ -42,10 +43,9 @@ public class UserService implements UserValidatorRepo, CreateAccountRepo, LoginR
     }
 
     @Override
-    public Users login(String username, String password) {
-        Users userDB =  null;
-        // db.getUsersByEmail(username);
-        // Neu khong dung thi tra ve user Null
+    public Users login(String username, String password) throws SQLException {
+        Users userDB =  db.getUsersByEmail(username);
+
         return userDB;
     }
 

@@ -1,6 +1,5 @@
 package com.example.Controllers;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 
 import com.example.Service.UserValidatorRepo;
@@ -12,11 +11,11 @@ public class UserValidatorController {
         this.userValidatorRepo = userValidatorRepo;
     }
 
-    public String validUser(String email, String password) throws SQLException{
+    public boolean validUser(String email, String password) throws SQLException{
         if(userValidatorRepo.validUser(email, password)){
-            return "Valid";
+            return true;
         } else {
-            return "Unvalid";
+            return false;
         }
     }
 }

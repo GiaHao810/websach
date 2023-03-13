@@ -39,9 +39,9 @@ public class ChangepassServlet extends HttpServlet {
         String oldP = req.getParameter("oldPassword");
         String newP = req.getParameter("newPassword");
 
-        String result = null;
+        boolean result_valid = false;
         try {
-            result = userValidatorController.validUser(email, oldP);
+            result_valid = userValidatorController.validUser(email, oldP);
         } catch (SQLException e) {
             // Xử lý lỗi kết nối cơ sở dữ liệu
             resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Lỗi kết nối cơ sở dữ liệu.");
@@ -50,11 +50,10 @@ public class ChangepassServlet extends HttpServlet {
             resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Lỗi xử lý yêu cầu.");
         }
 
-        if(result == "Valid"){
-            String result_pass = null;
+        if(result_valid){
             try {
                 changpassController.changepassword(email, oldP, newP);
-                out.println("Thanh cong");
+                out.println("Doi mat khau thanh cong");
             } catch (SQLException e) {
                 // Xử lý lỗi kết nối cơ sở dữ liệu
                 resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Lỗi kết nối cơ sở dữ liệu.");
@@ -62,8 +61,8 @@ public class ChangepassServlet extends HttpServlet {
                 // Xử lý lỗi khác
                 resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Lỗi xử lý yêu cầu.");
             }
-        } else if(result == "Unvalid") {
-            out.println("Khong thanh cong");
+        } else {
+            out.println("Doi mat khau khong thanh cong");
         }
     }
 }
