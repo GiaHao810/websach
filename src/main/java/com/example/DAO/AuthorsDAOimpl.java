@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import com.example.connect.SqlServerConnUtils_SQLJDBC;
 import com.example.model.Authors;
 
 public class AuthorsDAOimpl implements AuthorsDAO {
@@ -26,6 +25,12 @@ public class AuthorsDAOimpl implements AuthorsDAO {
     public int add(Authors authors) {
         String insertSql = " INSERT INTO INFO_BOOK.dbo.Authors(author_id, name_a) VALUES (?, ?)";
         try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            Connection connection = ConnectionManager.getConnection();
             PreparedStatement statement = connection.prepareStatement(insertSql);
             statement.setInt(1, authors.getAuthor_id());
             statement.setString(2, authors.getName_a());
@@ -46,6 +51,12 @@ public class AuthorsDAOimpl implements AuthorsDAO {
     public int update(Authors authors) {
         String updateSql = "UPDATE INFO_BOOK.dbo.Authors SET name_a = ? WHERE author_id = ?";
         try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            Connection connection = ConnectionManager.getConnection();
             PreparedStatement statement = connection.prepareStatement(updateSql);
             statement.setString(1, authors.getName_a());
             statement.setInt(2, authors.getAuthor_id());
@@ -62,6 +73,12 @@ public class AuthorsDAOimpl implements AuthorsDAO {
     public int deleted(int id) {
         String deleteSql = "DELETE FROM INFO_BOOK.dbo.Authors WHERE author_id = ?";
         try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            Connection connection = ConnectionManager.getConnection();
             PreparedStatement statement = connection.prepareStatement(deleteSql);
             statement.setInt(1, id);
             int result = statement.executeUpdate();
@@ -79,6 +96,12 @@ public class AuthorsDAOimpl implements AuthorsDAO {
 
         String selectSql = "SELECT * FROM INFO_BOOK.dbo.Authors WHERE author_id = ?";
         try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            Connection connection = ConnectionManager.getConnection();
             PreparedStatement statement = connection.prepareStatement(selectSql);
             statement.setInt(1, id);
             ResultSet result = statement.executeQuery();
@@ -100,6 +123,12 @@ public class AuthorsDAOimpl implements AuthorsDAO {
         List<Authors> list = new ArrayList<Authors>();
         String selectSql = "SELECT * FROM INFO_BOOK.dbo.Authors";
         try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            connection = ConnectionManager.getConnection();
             PreparedStatement statement = connection.prepareStatement(selectSql);
             ResultSet result = statement.executeQuery();
             while (result.next()) {

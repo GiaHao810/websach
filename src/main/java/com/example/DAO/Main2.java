@@ -10,9 +10,9 @@ import com.example.model.Book;
 
 public class Main2 {
     private static Connection getConnection() throws SQLException {
-        String url = "jdbc:sqlserver://localhost:1422;databaseName=INFO_BOOK";
+        String url = "jdbc:sqlserver://LAPTOP-VV7DQ0EU:1433;databaseName=INFO_BOOK;";
         String user = "sa";
-        String password = "123456";
+        String password = "123";
         return DriverManager.getConnection(url, user, password);
     }
     
@@ -22,10 +22,13 @@ public class Main2 {
         authorDAO.add(author);
     }
     
-    private static void getAuthorByID(Connection connection, int id) {
-        AuthorsDAOimpl authorDAO = new AuthorsDAOimpl(connection);
-        Authors author = authorDAO.getAuthorsByID(id);
-        System.out.println("Thông tin sinh viên có id " + id + ": " + author);
+    private static void getbook(Connection connection, int id) {
+
+        BookDAOimpl a = new BookDAOimpl(connection);
+        Book author = a.getBookByID(id);
+        String title = author.getTitle();
+
+        System.out.println("Thông tin sinh viên có id " + id + ": " + title);
     }
     
     private static void updateAuthor(Connection connection, Authors author) {
@@ -48,8 +51,7 @@ public class Main2 {
 
     public static void main(String[] args) {
         try (Connection connection = getConnection()) {
-            addNewAuthor(connection);
-            getAuthorByID(connection, 1);
+            getbook(connection, 1);
             // Authors author = new Authors(4, "Nguyen Van B");
             // updateAuthor(connection, author);
             // deleteAuthor(connection, 1);

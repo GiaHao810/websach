@@ -28,7 +28,7 @@
                 <div class="header-left col l-4">
                     <ul class="header-nav row">
                         <li class="header-nav__item l-3">
-                            <a href="#" class="header-nav__item-link header-nav__item-link--active">Home</a>
+                            <a href="http://localhost:8080/websach/home" class="header-nav__item-link header-nav__item-link--active">Home</a>
                         </li>
                         <li class="header-nav__item l-3">
                             <a href="#" class="header-nav__item-link">Pages</a>
@@ -136,9 +136,13 @@
                                     <i class="ti-close"></i>
                                 </label>
                             </div>
+
                             <div class="search-wrap_from grid wide">
-                                <input type="text" placeholder="Type words and hit enter">
-                                <button class="btn"><i class="ti-search"></i></button>
+                                <form action="Findbook" method="post">
+                                    <input type="text" placeholder=" sreach id Book " name = "book_id">
+                                    <button class="btn"><i class="ti-search"></i></button>
+                                </form>
+
                             </div>
                         </div>
 

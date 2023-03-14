@@ -14,7 +14,7 @@ public class SqlServerConnUtils_SQLJDBC {
         String sqlInstanceName = "";
         String database = "INFO_BOOK";
         String userName = "sa";
-        String password = "123456";
+        String password = "123";
 
         return getConnection(hostName, sqlInstanceName, database, userName, password);
     }

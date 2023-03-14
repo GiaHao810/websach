@@ -25,6 +25,12 @@ public class BookDAOimpl implements BookDAO {
 
         String insertSql = "INSERT INTO INFO_BOOK.dbo.Books(book_id, title, price, quantity, image_url, dst , author_id ) VALUES (?, ? ,?, ? ,?, ? , ? )";
         try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            connection = ConnectionManager.getConnection();
             PreparedStatement statement = connection.prepareStatement(insertSql);
             statement.setInt(1, book.getBook_id());
             statement.setString(2, book.getTitle());
@@ -50,6 +56,13 @@ public class BookDAOimpl implements BookDAO {
         
         String updateSql = "UPDATE INFO_BOOK.dbo.Books SET title = ? , price = ? , quantity = ? , image_url = ?, dst = ? , author_id = ? WHERE book_id = ?";
         try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        try {
+            connection = ConnectionManager.getConnection();
             PreparedStatement statement = connection.prepareStatement(updateSql);
             statement.setInt(7, book.getBook_id());
             statement.setString(1, book.getTitle());
@@ -69,8 +82,17 @@ public class BookDAOimpl implements BookDAO {
 
     @Override
     public int deleted(int id) {
+        
         String deleteSql = "DELETE FROM INFO_BOOK.dbo.Books WHERE book_id = ?";
+
         try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        try {
+            connection = ConnectionManager.getConnection();
             PreparedStatement statement = connection.prepareStatement(deleteSql);
             statement.setInt(1, id);
             int result = statement.executeUpdate();
@@ -85,7 +107,14 @@ public class BookDAOimpl implements BookDAO {
     @Override
     public Book getBookByID(Integer id) {
         String selectSql = "SELECT * FROM INFO_BOOK.dbo.Books WHERE book_id = ?";
+
         try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            connection = ConnectionManager.getConnection();
             PreparedStatement statement = connection.prepareStatement(selectSql);
             statement.setInt(1, id);
             ResultSet result = statement.executeQuery();
@@ -112,6 +141,12 @@ public class BookDAOimpl implements BookDAO {
         List<Book> list = new ArrayList<Book>();
         String selectSql = "SELECT * FROM INFO_BOOK.dbo.Books";
         try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            connection = ConnectionManager.getConnection();
             PreparedStatement statement = connection.prepareStatement(selectSql);
             ResultSet result = statement.executeQuery();
             while (result.next()) {

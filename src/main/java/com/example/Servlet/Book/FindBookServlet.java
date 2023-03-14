@@ -18,6 +18,7 @@ public class FindBookServlet extends HttpServlet{
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         RequestDispatcher dispatcher = req.getRequestDispatcher("jsp");
         dispatcher.forward(req, resp);
+
     }
 
     @Override
@@ -66,7 +67,10 @@ public class FindBookServlet extends HttpServlet{
                 resp.getWriter().write(" da xay ra loi " + errormessge); 
             }
         }
+        
     }
+
+    
         
 
 

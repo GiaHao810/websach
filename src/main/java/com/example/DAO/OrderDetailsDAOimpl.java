@@ -20,6 +20,12 @@ public class OrderDetailsDAOimpl implements OrderDetailsDAO{
     public int add(OrderDetails od) {
         String insertSql = " INSERT INTO INFO_BOOK.dbo.OrderDetails(order_detail_id, id_user, book_id , quantity , total_price) VALUES (?, ?, ?, ?, ?)";
         try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            connection = ConnectionManager.getConnection();
             PreparedStatement statement = connection.prepareStatement(insertSql);
             statement.setInt(1, od.getOrder_details_id());
             statement.setInt(2, od.getId_user());
@@ -42,6 +48,12 @@ public class OrderDetailsDAOimpl implements OrderDetailsDAO{
     public int update(OrderDetails od) {
         String updateSql = "UPDATE INFO_BOOK.dbo.OrderDetails SET id_user = ?, book_id , quantity = ? , total_price = ? WHERE order_detail_id = ?";
         try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            connection = ConnectionManager.getConnection();
             PreparedStatement statement = connection.prepareStatement(updateSql);
             statement.setInt(1, od.getId_user());
             statement.setInt(2, od.getBook_id());
@@ -61,6 +73,12 @@ public class OrderDetailsDAOimpl implements OrderDetailsDAO{
     public int deleted(int id) {
         String deleteSql = "DELETE FROM INFO_BOOK.dbo.OrderDetails WHERE order_detail_id = ?";
         try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            Connection connection = ConnectionManager.getConnection();
             PreparedStatement statement = connection.prepareStatement(deleteSql);
             statement.setInt(1, id);
             int result = statement.executeUpdate();
@@ -76,6 +94,12 @@ public class OrderDetailsDAOimpl implements OrderDetailsDAO{
     public OrderDetails getOrderDetailsByID(Integer id) {
         String selectSql = "SELECT * FROM INFO_BOOK.dbo.OrderDetails WHERE order_detail_id = ?";
         try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            Connection connection = ConnectionManager.getConnection();
             PreparedStatement statement = connection.prepareStatement(selectSql);
             statement.setInt(1, id);
             ResultSet result = statement.executeQuery();
@@ -99,6 +123,12 @@ public class OrderDetailsDAOimpl implements OrderDetailsDAO{
         List <OrderDetails> list = new ArrayList <OrderDetails>();
         String selectSql = "SELECT * FROM INFO_BOOK.dbo.Authors";
         try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            Connection connection = ConnectionManager.getConnection();
             PreparedStatement statement = connection.prepareStatement(selectSql);
             ResultSet result = statement.executeQuery();
             while (result.next()) {
