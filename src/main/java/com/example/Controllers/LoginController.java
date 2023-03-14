@@ -11,14 +11,9 @@ public class LoginController{
     public LoginController(LoginRepo loginRepo) {
         this.loginRepo = loginRepo;
     }
-    public boolean login(String email, String password) throws SQLException{
+    public Users login(String email, String password) throws SQLException{
         Users resultUser = loginRepo.login(email, password);
-        boolean result = false;
 
-        if(resultUser == null) {
-            return false;
-        } else {
-            return true;
-        }
+        return resultUser;
     }
 }

@@ -11,12 +11,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.example.Controllers.LoginController;
 import com.example.Controllers.UserValidatorController;
 import com.example.Service.LoginRepo;
 import com.example.Service.UserService;
 import com.example.Service.UserValidatorRepo;
+import com.example.model.Users;
 
 @WebServlet(urlPatterns = { "/login" })
 public class LoginServlet extends HttpServlet {
@@ -39,40 +41,35 @@ public class LoginServlet extends HttpServlet {
 
         String email = req.getParameter("email");
         String password = req.getParameter("password");
-        boolean result_login = false;
-        boolean result_valid = false;
 
         try {
-            result_valid = userValidatorController.validUser(email, password);
+            if(userValidatorController.validUser(email, password)){
+                out.println("Dang nhap thanh cong <a href='home'>HOME PAGE</a>");
+
+                Users userDB = loginController.login(email, password);
+
+                HttpSession session = req.getSession();
+
+                // session để lưu email và fullname
+                // session.setMaxInactiveInterval(0);
+                session.setAttribute("email", userDB.getEmail());
+                session.setAttribute("fullname", userDB.getFull_name());
+
+                if(userDB.getRole() == 0) {
+                    // hiển thị trang theo role
+                } else {
+
+                }
+                
+            } else {
+                out.println("Dang nhap that bai");
+            }
         } catch (SQLException e) {
             // Xử lý lỗi kết nối cơ sở dữ liệu
             resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Lỗi kết nối cơ sở dữ liệu.");
         } catch (Exception e) {
             // Xử lý lỗi khác
             resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Lỗi xử lý yêu cầu.");
-        }
-
-        if (result_valid) {
-            
-            result_login = false;
-            try {
-                result_login = loginController.login(email, password);
-            } catch (SQLException e) {
-                // Xử lý lỗi kết nối cơ sở dữ liệu
-                resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Lỗi kết nối cơ sở dữ liệu.");
-            } catch (Exception e) {
-                // Xử lý lỗi khác
-                resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Lỗi xử lý yêu cầu.");
-            }
-            
-
-            if(result_login) {
-                // Xu ly dang nhap thanh cong
-                out.println("Dang nhap thanh cong");
-            }
-
-        } else {
-            out.println("Dang nhap that bai");
         }
     }
 }
