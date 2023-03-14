@@ -155,10 +155,11 @@
                                 <i class="fa-regular fa-circle-user"></i>
                             </label>
                             <input hidden type="checkbox" class="account-bar_checked" id="account-bar_input">
+
                             <div class="account-bar">
                                 <div class="account-bar__logouted">
                                     <div class="wrap-item">
-                                        <a href="./login.html" class="account-login">
+                                        <a href="login" class="account-login">
                                             <i class="fa-solid fa-arrow-right-from-bracket"></i>
                                             <p>Log in</p>
                                         </a>
@@ -166,11 +167,12 @@
                                             <i class="ti-close"></i>
                                         </label>
                                     </div>
-                                    <a href="#" class="account-register">
+                                    <a href="createaccount" class="account-register">
                                         <i class="fa-regular fa-registered"></i>
                                         <p>Register</p>
                                     </a>
                                 </div>
+
                                 <div class="account-bar__logined">
                                     <div class="account-bar__header">
                                         <h1 class="account-name">Name</h1>
@@ -191,6 +193,7 @@
                                         <p>Log out</p>
                                     </a>
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -245,6 +248,4 @@
 
         </footer>
     </body>
->
-
-    </html>
+</html>

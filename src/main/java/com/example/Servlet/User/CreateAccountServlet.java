@@ -49,7 +49,7 @@ public class CreateAccountServlet extends HttpServlet {
                 out.println("Email da bi trung <a href='home'>CLICK HERE TO RETURN HOME PAGE</a>");
             } else {
                 if(createAccountController.createaccount(user)) {
-                    out.println("Tao tai khoan thanh cong <a href='home'>CLICK HERE TO RETURN HOME PAGE</a>");
+                    resp.sendRedirect("home");
                 } else {
                     out.println("Tao tai khoan that bai <a href='home'>CLICK HERE TO RETURN HOME PAGE</a>");
                 }

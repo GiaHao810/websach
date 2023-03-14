@@ -42,7 +42,8 @@ public class ChangepassServlet extends HttpServlet {
         try {
             if(userValidatorController.validUser(email, oldP)){
                 changpassController.changepassword(email, oldP, newP);
-                out.println("Doi mat khau thanh cong <a href='home'>CLICK HERE TO RETURN HOME PAGE</a>");
+
+                resp.sendRedirect("home");
             } else {
                 out.println("Doi mat khau khong thanh cong <a href='home'>CLICK HERE TO RETURN HOME PAGE</a>");
             }

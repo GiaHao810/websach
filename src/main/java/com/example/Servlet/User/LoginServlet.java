@@ -1,8 +1,9 @@
 package com.example.Servlet.User;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
 import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
@@ -12,6 +13,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import com.example.Controllers.LoginController;
 import com.example.Controllers.UserValidatorController;
@@ -26,7 +32,7 @@ public class LoginServlet extends HttpServlet {
     private UserValidatorController userValidatorController = new UserValidatorController(userValidatorRepo);
     private LoginRepo loginRepo = new UserService();
     private LoginController loginController = new LoginController(loginRepo);
-    
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         RequestDispatcher view = req.getRequestDispatcher("login.html");
@@ -43,7 +49,7 @@ public class LoginServlet extends HttpServlet {
         String password = req.getParameter("password");
 
         try {
-            if(userValidatorController.validUser(email, password)){
+            if (userValidatorController.validUser(email, password)) {
                 out.println("Dang nhap thanh cong");
 
                 Users userDB = loginController.login(email, password);
@@ -53,13 +59,13 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("email", userDB.getEmail());
                 session.setAttribute("fullname", userDB.getFull_name());
 
-                if(userDB.getRole() == 0) {
-                    out.println("<a href='home'>CLICK HERE TO RETURN HOME PAGE</a>");
+                if (userDB.getRole() == 0) {
+                    resp.sendRedirect("home");
                     // hiển thị trang theo role
-                } else if (userDB.getRole() == 1){
+                } else if (userDB.getRole() == 1) {
                     out.println("<a href='listbook'>ADMIN PAGE</a>");
                 }
-                
+
             } else {
                 out.println("Dang nhap that bai<a href='home'>CLICK HERE TO RETURN HOME PAGE</a>");
             }
