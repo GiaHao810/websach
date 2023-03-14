@@ -54,7 +54,8 @@
 }
 
 .login-btn,
-.btn-register{
+.btn-register,
+.btn-acp{
     background-color: var(--blue-color);
     border-color: var(--blue-color);
     color: #fff;
@@ -71,7 +72,8 @@
 }
 
 .login-btn:hover,
-.btn-register:hover {
+.btn-register:hover,
+.btn-acp:hover {
     background-color: var(--green-color);
 }
 
