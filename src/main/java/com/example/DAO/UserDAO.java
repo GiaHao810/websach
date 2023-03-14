@@ -11,7 +11,7 @@ public interface UserDAO {
 
     public int update(Users user) throws SQLException;
 
-    public int deleted(int id);
+    public int deleted(int id) throws SQLException;
 
     public Users getUsersByID(Integer id);
 

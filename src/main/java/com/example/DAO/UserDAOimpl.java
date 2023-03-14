@@ -65,23 +65,19 @@ public class UserDAOimpl implements UserDAO {
     
 
     @Override
-    public int deleted(int id) {
+    public int deleted(int id) throws SQLException {
         String deleteSql = "DELETE FROM INFO_BOOK.dbo.Users WHERE id_user = ?";
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         } catch (Exception e) {
             // TODO: handle exception
         }
-        try (Connection connection = ConnectionManager.getConnection()){
+        Connection connection = ConnectionManager.getConnection();
             PreparedStatement statement = connection.prepareStatement(deleteSql);
             statement.setInt(1, id);
             int result = statement.executeUpdate();
             System.out.println("Xóa user thành công!");
             return result;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return 0;
     }
 
     @Override
