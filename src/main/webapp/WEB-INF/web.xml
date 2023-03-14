@@ -4,7 +4,7 @@
  
 
 <web-app>
-  <display-name>Archetype Created Web Application</display-name>
+  <display-name>SHOP BOOK ONLINE</display-name>
     <welcome-file-list>
         <welcome-file>home.jsp</welcome-file>
     </welcome-file-list>
