@@ -61,7 +61,7 @@ public class LoginServlet extends HttpServlet {
                 }
                 
             } else {
-                out.println("Dang nhap that bai");
+                out.println("Dang nhap that bai<a href='home'>CLICK HERE TO RETURN HOME PAGE</a>");
             }
         } catch (SQLException e) {
             // Xử lý lỗi kết nối cơ sở dữ liệu
