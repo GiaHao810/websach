@@ -58,7 +58,7 @@ public class BookDetailServlet extends HttpServlet {
                 String NameAuthors = b.getName_a();
                 req.setAttribute("NameAuthors", NameAuthors);
 
-            RequestDispatcher dispatcher = req.getRequestDispatcher("show.jsp");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("detail.jsp");
             dispatcher.forward(req, resp);
 
             } catch (NumberFormatException e) {

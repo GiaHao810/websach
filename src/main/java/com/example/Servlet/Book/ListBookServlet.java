@@ -19,9 +19,11 @@ public class ListBookServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<Book> blist = book.getAllBook();
+
+        
         req.setAttribute("Booklist", blist);
     
-        RequestDispatcher dispatcher = req.getRequestDispatcher("jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("adminBook.jsp");
         dispatcher.forward(req, resp);
     }
 

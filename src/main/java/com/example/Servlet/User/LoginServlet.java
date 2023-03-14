@@ -57,7 +57,7 @@ public class LoginServlet extends HttpServlet {
                     out.println("<a href='home'>CLICK HERE TO RETURN HOME PAGE</a>");
                     // hiển thị trang theo role
                 } else if (userDB.getRole() == 1){
-                    out.println("<a href='admin'>ADMIN PAGE</a>");
+                    out.println("<a href='listbook'>ADMIN PAGE</a>");
                 }
                 
             } else {

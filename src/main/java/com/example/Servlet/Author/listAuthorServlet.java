@@ -21,7 +21,7 @@ public class listAuthorServlet extends HttpServlet{
         List<Authors> alist = Authors.getAllAuthors();
         req.setAttribute("authorlist", alist);
   
-        RequestDispatcher dispatcher = req.getRequestDispatcher("jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("adminAuthor.jsps");
         dispatcher.forward(req, resp);
 
     }

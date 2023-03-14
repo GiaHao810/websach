@@ -1,3 +1,11 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" isELIgnored="false" %>
+<%@ page import="org.apache.commons.codec.binary.*" %>
+
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,7 +38,7 @@
                 <div class="header-left col l-5">
                     <ul class="header-nav row">
                         <li class="header-nav__item l-3">
-                            <a href="../index.html" class="header-nav__item-link">Home</a>
+                            <a href="http://localhost:8080/websach/home" class="header-nav__item-link">Home</a>
                         </li>
                         <li class="header-nav__item l-3">
                             <a href="#" class="header-nav__item-link">Pages</a>
@@ -49,7 +57,7 @@
                             <i class="ti-bag"></i>
                         </label>
                         <input hidden type="checkbox" class="cart-list_checked" id="cart-list__input">
-                        <div class="cart-list">
+                        <!-- <div class="cart-list">
                             <div class="cart-content">
                                 <div class="cart-content__null">
                                     <i class="ti-bag"></i>
@@ -122,7 +130,7 @@
                                     <a href="#" class="btn cart-content__btn-buy">Buy</a>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
                         <label for="search-wrap_input" class="search">
                             <i class="ti-search"></i>
@@ -150,17 +158,17 @@
         <div class="grid wide">
             <div class="row">
                 <div class="book-img col l-6">
-                    <img src="./assets/img/book.jpg" alt="">
+                    <img src="data:image/jpeg;base64,${fn:escapeXml(image_url)}"/>
                 </div>
                 <div class="book-detail col l-6">
-                    <h1 class="book-title">Gardening & Landscaping</h1>
+                    <h1 class="book-title">${title}</h1>
                     <span class="book-author text-detail">
                         <span class="book-author__lable">Author: </span>
-                        <span class="book-author__value">Name</span>
+                        <span class="book-author__value">${name_a}</span>
                     </span>
                     <span class="book-rate">
                         <div class="row">
-                            <p class="book-price col l-6">$22.00</p>
+                            <p class="book-price col l-6">${price}</p>
                             <div class="start-rating col l-6">
                                 <ul>
                                     <li><i class="star-icon star-icon--fill fa-solid fa-star"></i></li>
@@ -173,16 +181,9 @@
                         </div>
                     </span>
                     <div class="book-decs text-detail">
-                        <p>Dicta sunt explicabo. Nemo enim ipsam voluptatem voluptas sit odit aut fugit, sed quia
-                            consequuntur.
-                            Lorem ipsum nonum eirmod dolor.</p>
-                        <p>
-                            Aquia sit amet, elitr, sed diam nonum eirmod tempor invidunt labore et dolore magna
-                            aliquyam.erat,
-                            sed diam voluptua. At vero accusam et justo duo dolores et ea rebum. Stet clitain vidunt ut
-                            labore.</p>
+                        <p>${description}</p>
                     </div>
-                    <table class="book-info text-detail">
+                    <!-- <table class="book-info text-detail">
                         <tbody>
                             <tr class="book-publisher">
                                 <th class="book-publisher__lable">Publisher: </th>
@@ -197,7 +198,7 @@
                                 <td class="book-pages__value">Number</td>
                             </tr>
                         </tbody>
-                    </table>
+                    </table> -->
                     <!-- <span class="book-total book-price">$22.00</span> -->
                     <div class="book-quantity">
                         <div class="row">
@@ -207,10 +208,12 @@
                                 <span class="book-count__dec"><i class="ti-angle-down"></i></span>
                             </div> -->
 
-                            <button class="btn book-btn">
-                                <i class="ti-shopping-cart"></i>
-                                Add to cart
-                            </button>
+                            <form action="">
+                                <button class="btn book-btn">
+                                    <i class="ti-shopping-cart"></i>
+                                    Add to cart
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -223,6 +226,6 @@
     </footer>
 </body>
 
-<script src="./assets/js/addtocartDetail.js"></script>
+<!-- <script src="./assets/js/addtocartDetail.js"></script> -->
 
 </html>
