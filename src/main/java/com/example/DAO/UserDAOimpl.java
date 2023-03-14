@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -158,21 +159,37 @@ public class UserDAOimpl implements UserDAO {
     }
 
     public int countUser() throws SQLException {
-        String insertSql = "  SELECT COUNT(*) FROM INFO_BOOK.dbo.Users";
-        
+        Connection connection = ConnectionManager.getConnection();
+        Statement statement = null;
+        ResultSet rs = null;
+
+        String maxID = "SELECT MAX(id_user) AS latest_user_id FROM Users";
+        String emptyID = "SELECT id_user FROM Users WHERE NOT EXISTS (SELECT * FROM Users u2 WHERE u2.id_user = Users.id_user + 1) ORDER BY id_user ASC";
+
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         } catch (Exception e) {
             // TODO: handle exception
         }
 
-        Connection connection = ConnectionManager.getConnection();
-        PreparedStatement statement = connection.prepareStatement(insertSql);
-        ResultSet rs = statement.executeQuery();
-        rs.next();
-        int result = rs.getInt(1);
+        statement = connection.createStatement();
+        
+        rs = statement.executeQuery(emptyID);
 
-        return result;
+        int newUserID = 0;
+
+        if(rs.next()){
+            newUserID = rs.getInt("id_user") + 1;
+        }
+        // } else {
+        //     rs = statement.executeQuery(maxID);
+
+        //     if(rs.next()) {
+        //         newUserID = rs.getInt("lastest_user_id") + 1;
+        //     }
+        // }
+
+        return newUserID;
     }
 
 }

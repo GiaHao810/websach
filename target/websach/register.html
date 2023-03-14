@@ -18,41 +18,48 @@
     <link rel="stylesheet" href="./assets/css/style.css">
 
     <link rel="stylesheet" href="./assets/css/styleLogin.css">
-
 </head>
 
 <body>
     <header>
         <div class="grid wide">
             <div class="row">
-
+                
                 <div class="header-midle col l-12">
                     <h1 class="header-logo">Books Online</h1>
                 </div>
-
+                
             </div>
         </div>
     </header>
+
     <div class="account-table">
         <div class="account-container">
             <div class="account-register__container">
                 <div class="account-header">
-                    <h2>Change password</h2>
-                    <p>Please change password account detail bellow.</p>
+                    <h2>Register</h2>
+                    <p>Please login using account detail bellow.</p>
                 </div>
                 <div class="account-content">
                     <div class="account-content__from">
-                        <form action="changepassword" method="post">
-                            <input class="input-email" type="text" placeholder="Email" name="email" required>
-                            <input class="input-pass" type="password" placeholder="Old Password" name="oldPassword" required>
-                            <input class="input-pass" type="password" placeholder="New Password" name="newPassword" required>
-                            <input class="btn-acp" type="submit" value="Xac nhan" required>
+                        <form action="createaccount" method="post">
+                            <input class="input-name" type="text" placeholder="Full Name" name="fullname" required>
+                            <input class ="input-email" type="email" placeholder="Email" name="email" required>
+                            <input class="input-address" type="text" placeholder="Address" name="address" required>
+                            <input class="input-pass" type="password", placeholder="Password" name="password" required>
+                            <input class="btn-register" type="submit" value="Register" required>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <footer>
+
+    </footer>
 </body>
+
+<script src="./assets/js/mainRegister.js"></script>
 
 </html>

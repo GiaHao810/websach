@@ -15,7 +15,7 @@ public class Main3 {
         CreateAccountController createAccountController = new CreateAccountController(createAccountRepo);
         UserValidatorByMailRepo userValidatorMailRepo = new UserService();
         UserValidatorController userValidatorController = new UserValidatorController(userValidatorMailRepo);
-        String email = "a@gmail.com";
+        String email = "d@gmail.com";
         Users user = new Users(0, email, "123", "Nguyen Van A", "Binh Thanh", 0);
 
         try {
