@@ -45,7 +45,7 @@ public class HomeServlet extends HttpServlet {
         }
         req.setAttribute("productList", dtoList);
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("test.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("home.jsp");
         dispatcher.forward(req, resp);
     }
 
