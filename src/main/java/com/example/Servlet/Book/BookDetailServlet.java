@@ -47,7 +47,7 @@ public class BookDetailServlet extends HttpServlet {
                 String base64EncodedImage = Base64.encodeBase64String(imageData);
 
                 req.setAttribute("book_id", book_id);
-                req.setAttribute("book", title);
+                req.setAttribute("title", title);
                 req.setAttribute("price", price);
                 req.setAttribute("quantity", quantity);
                 req.setAttribute("description", description);

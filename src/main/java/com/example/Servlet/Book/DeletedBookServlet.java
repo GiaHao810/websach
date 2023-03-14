@@ -31,7 +31,7 @@ public class DeletedBookServlet extends HttpServlet {
                 if (result > 0) {
                     resp.setContentType("text/plain");
                     resp.setCharacterEncoding("UTF-8");
-                    resp.getWriter().write(" :((( em vẫn đẹp như ngày anh mất em á á ");
+                    resp.getWriter().write(" :((( em vẫn đẹp như ngày anh mất em !!! ");
                 } else {
                     resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, " book chua bi xoa ");
                 }

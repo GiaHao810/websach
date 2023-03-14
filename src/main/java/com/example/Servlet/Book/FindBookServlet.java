@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.codec.binary.Base64;
+
 import com.example.DAO.BookDAOimpl;
 import com.example.model.Book;
 @WebServlet(urlPatterns = {"/Findbook"})
@@ -43,13 +45,14 @@ public class FindBookServlet extends HttpServlet{
                     String description = a.getDescription();
                     byte[] imageData = a.getImage_url();
                     int author_id = a.getAuthor_id();
+                    String base64EncodedImage = Base64.encodeBase64String(imageData);
     
                     req.setAttribute("book_id", book_id);
                     req.setAttribute("book", title);
                     req.setAttribute("price", price);
                     req.setAttribute("quantity", quantity);
                     req.setAttribute("description", description);
-                    req.setAttribute("image_url", imageData);
+                    req.setAttribute("image_url", base64EncodedImage);
                     req.setAttribute("author_id", author_id);
     
                     RequestDispatcher dispatcher = req.getRequestDispatcher("jsp");
