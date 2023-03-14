@@ -42,9 +42,9 @@ public class ChangepassServlet extends HttpServlet {
         try {
             if(userValidatorController.validUser(email, oldP)){
                 changpassController.changepassword(email, oldP, newP);
-                out.println("Doi mat khau thanh cong");
+                out.println("Doi mat khau thanh cong <a href='home'>CLICK HERE TO RETURN HOME PAGE</a>");
             } else {
-                out.println("Doi mat khau khong thanh cong");
+                out.println("Doi mat khau khong thanh cong <a href='home'>CLICK HERE TO RETURN HOME PAGE</a>");
             }
         } catch (SQLException e) {
             // Xử lý lỗi kết nối cơ sở dữ liệu

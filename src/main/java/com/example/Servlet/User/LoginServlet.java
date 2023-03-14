@@ -44,21 +44,20 @@ public class LoginServlet extends HttpServlet {
 
         try {
             if(userValidatorController.validUser(email, password)){
-                out.println("Dang nhap thanh cong <a href='home'>HOME PAGE</a>");
+                out.println("Dang nhap thanh cong");
 
                 Users userDB = loginController.login(email, password);
 
                 HttpSession session = req.getSession();
 
-                // session để lưu email và fullname
-                // session.setMaxInactiveInterval(0);
                 session.setAttribute("email", userDB.getEmail());
                 session.setAttribute("fullname", userDB.getFull_name());
 
                 if(userDB.getRole() == 0) {
+                    out.println("<a href='home'>CLICK HERE TO RETURN HOME PAGE</a>");
                     // hiển thị trang theo role
-                } else {
-
+                } else if (userDB.getRole() == 1){
+                    out.println("<a href='admin'>ADMIN PAGE</a>");
                 }
                 
             } else {

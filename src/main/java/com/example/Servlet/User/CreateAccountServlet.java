@@ -46,12 +46,12 @@ public class CreateAccountServlet extends HttpServlet {
 
         try {
             if(userValidatorController.validUserByMail(email)) {
-                out.println("Email da bi trung");
+                out.println("Email da bi trung <a href='home'>CLICK HERE TO RETURN HOME PAGE</a>");
             } else {
                 if(createAccountController.createaccount(user)) {
-                    out.println("Tao tai khoan thanh cong");
+                    out.println("Tao tai khoan thanh cong <a href='home'>CLICK HERE TO RETURN HOME PAGE</a>");
                 } else {
-                    out.println("Tao tai khoan that bai");
+                    out.println("Tao tai khoan that bai <a href='home'>CLICK HERE TO RETURN HOME PAGE</a>");
                 }
             }
         } catch (SQLException e) {
