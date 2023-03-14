@@ -1,7 +1,6 @@
 package com.example.DAO;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,13 +8,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.naming.spi.DirStateFactory.Result;
 
 import com.example.model.Users;
 
 public class UserDAOimpl implements UserDAO {
-
-    private Connection connection;
 
     @Override
     public int add(Users user) throws SQLException {
@@ -158,6 +154,7 @@ public class UserDAOimpl implements UserDAO {
         return list;
     }
 
+    @Override
     public int countUser() throws SQLException {
         Connection connection = ConnectionManager.getConnection();
         Statement statement = null;

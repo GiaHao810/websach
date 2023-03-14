@@ -18,4 +18,6 @@ public interface UserDAO {
     public Users getUsersByEmail(String email) throws SQLException;
 
     public List<Users> getAllBook();
+
+    public int countUser() throws SQLException;
 }
