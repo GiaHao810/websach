@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.spi.DirStateFactory.Result;
+
 import com.example.model.Users;
 
 public class UserDAOimpl implements UserDAO {
@@ -93,8 +95,7 @@ public class UserDAOimpl implements UserDAO {
 
         Connection connection = ConnectionManager.getConnection();
             PreparedStatement statement = connection.prepareStatement(selectSql);
-            statement.setString(1, emailUN);
-            ResultSet result = statement.executeQuery();
+            statement.setString(1, emailUN);            ResultSet result = statement.executeQuery();
             if (result.next()) {
                 int id_user = result.getInt("id_user");
                 String email = result.getString("email");
@@ -154,6 +155,24 @@ public class UserDAOimpl implements UserDAO {
             e.printStackTrace();
         }
         return list;
+    }
+
+    public int countUser() throws SQLException {
+        String insertSql = "  SELECT COUNT(*) FROM INFO_BOOK.dbo.Users";
+        
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+
+        Connection connection = ConnectionManager.getConnection();
+        PreparedStatement statement = connection.prepareStatement(insertSql);
+        ResultSet rs = statement.executeQuery();
+        rs.next();
+        int result = rs.getInt(1);
+
+        return result;
     }
 
 }

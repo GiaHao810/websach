@@ -12,14 +12,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.example.Controllers.CreateAccountController;
+import com.example.Controllers.UserValidatorController;
 import com.example.Service.CreateAccountRepo;
 import com.example.Service.UserService;
+import com.example.Service.UserValidatorByMailRepo;
 import com.example.model.Users;
 
 @WebServlet(urlPatterns = {"/createaccount"})
 public class CreateAccountServlet extends HttpServlet {
     private CreateAccountRepo createAccountRepo = new UserService();
     private CreateAccountController createAccountController = new CreateAccountController(createAccountRepo);
+    private UserValidatorByMailRepo userValidatorByMailRepo = new UserService();
+    private UserValidatorController userValidatorController = new UserValidatorController(userValidatorByMailRepo);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -38,24 +42,24 @@ public class CreateAccountServlet extends HttpServlet {
         String address = req.getParameter("address");
         String password = req.getParameter("password");
 
-        // Chỗ này không thể tự động tạo ra
-        Users user = new Users(68, email, password, fullname, address, 0);
-        boolean result = false;
+        Users user = new Users(0, email, password, fullname, address, 0);
 
         try {
-            result = createAccountController.createaccount(user);
+            if(userValidatorController.validUserByMail(email)) {
+                out.println("Email da bi trung");
+            } else {
+                if(createAccountController.createaccount(user)) {
+                    out.println("Tao tai khoan thanh cong");
+                } else {
+                    out.println("Tao tai khoan that bai");
+                }
+            }
         } catch (SQLException e) {
             // Xử lý lỗi kết nối cơ sở dữ liệu
             resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Lỗi kết nối cơ sở dữ liệu.");
         } catch (Exception e) {
             // Xử lý lỗi khác
             resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Lỗi xử lý yêu cầu.");
-        }
-
-        if(result) {
-            out.println("Tao tai khoan thanh cong");
-        } else {
-            out.print("Tao tai khoan that bai");
         }
     }
 }

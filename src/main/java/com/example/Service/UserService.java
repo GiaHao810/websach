@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import com.example.DAO.UserDAOimpl;
 import com.example.model.Users;
 
-public class UserService implements UserValidatorRepo, CreateAccountRepo, LoginRepo, ChangepassRepo {     
+public class UserService implements UserValidatorRepo, CreateAccountRepo, LoginRepo, ChangepassRepo, UserValidatorByMailRepo {     
     private UserDAOimpl db = new UserDAOimpl();
 
     @Override
@@ -29,8 +29,26 @@ public class UserService implements UserValidatorRepo, CreateAccountRepo, LoginR
     }
 
     @Override
+    public boolean validUserByMail(String email) throws SQLException {
+        Users userDB = db.getUsersByEmail(email);
+        
+        if(userDB == null) {
+            return false;
+        }
+
+        if(userDB.getEmail().equals(email)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
     public boolean createAccount(Users user) throws SQLException {
-        // Chỗ này không biết trả về cái gì nên không thể xác định được phải bắt cái gì để hiển thị ra client
+        int countUser = db.countUser(); // Đếm số lượng user đang có trong hệ t hống - Vì id trong db là id = n nên ở đây luôn luôn là n + 1
+
+        user.setId_user(countUser); //Set User ID moi nhat
+
         int result = db.add(user);
 
         if(result == 200) {
